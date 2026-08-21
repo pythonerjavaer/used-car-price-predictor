@@ -1,3 +1,15 @@
-m«ëˆ§½©buªàºg§·õ,z»?~êÚ£ðèréžžÛ?
-‡^Çý´Û­<Û_Û{ü(®Oé®ˆÞrÛ?ºÇqªé®'¦·‰Ëh¯ø"¶›ÿ
-+‘ùhÂÏÜ‹)¥RÆ y¶¬{®vçºh¢ø¥zŠ.µø¥y¶ëy©­æ¤zw(uçl¶¸§‚)í¢{¦r«iË^®X§zÀÝuç(uç^r‡^²)éºØazZ]ŠÊek+aŠÉž²Æ z(§¦ëbž›­~)^uçÚº[_¢»-v)è¢ëiºÚ.¶›­~)^uçÚº[_¢»-v‹­
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[dev]'
+      - run: pytest
+      - run: used-car-price demo --output-dir artifacts/ci
+
